@@ -1,21 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { listDecks } from "../../utils/api";
+import React from "react";
 import DeckListItem from "./DeckListItem";
 
-export default function DeckList() {
-  const [decks, setDecks] = useState([]);
-
-  useEffect(() => {
-    const aborter = new AbortController();
-    async function listingDecks() {
-      const deckArr = await listDecks(aborter.signal);
-      setDecks(deckArr);
-    }
-    listingDecks();
-    return () => {
-      aborter.abort();
-    };
-  }, []);
+export default function DeckList({decks}) {
 
   const listOfDecks = decks.map(({ name, description, cards, id }) => (
     <DeckListItem

@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import Header from "./Header";
+import { listDecks } from "../utils/api";
 import NotFound from "./NotFound";
 import DeckList from "./DeckList/DeckList";
+import Study from "./Study/Study";
 
 function Layout() {
+  const [decks, setDecks] = useState([]);
+
+  useEffect(() => {
+    const aborter = new AbortController();
+    async function listingDecks() {
+      const deckArr = await listDecks(aborter.signal);
+      setDecks(deckArr);
+    }
+    listingDecks();
+    return () => {
+      aborter.abort();
+    };
+  }, []);
+
   return (
     <>
       <Header />
@@ -18,7 +34,7 @@ function Layout() {
               </button>
             </Link>
             <hr />
-            <DeckList />
+            <DeckList decks={decks} />
           </Route>
           <Route path="/create">
             <h1>Creating</h1>
@@ -27,7 +43,7 @@ function Layout() {
             <h1>Viewing Deck</h1>
           </Route>
           <Route exact path="/deck/:deckId/study">
-            <h1>Study!</h1>
+            <Study decks={decks}/>
           </Route>
           <Route>
             <NotFound />
