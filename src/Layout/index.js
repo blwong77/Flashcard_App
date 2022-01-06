@@ -4,18 +4,15 @@ import Header from "./Header";
 import { listDecks } from "../utils/api";
 import NotFound from "./NotFound";
 import DeckList from "./Deck/DeckList";
-import EditDeck from "./Deck/EditDeck";
-import CreateDeck from "./Deck/CreateDeck";
-import ViewDeck from "./Deck/ViewDeck";
-import Study from "./Study/Study";
+import DeckRouting from "./Deck/DeckRouting";
 
 function Layout() {
   const [decks, setDecks] = useState([]);
 
   useEffect(() => {
     const aborter = new AbortController();
-    listDecks(aborter.signal).then(setDecks)
-    
+    listDecks(aborter.signal).then(setDecks);
+
     return () => {
       aborter.abort();
     };
@@ -36,21 +33,7 @@ function Layout() {
             <DeckList decks={decks} />
           </Route>
 
-          <Route exact path="/decks/new">
-            <CreateDeck setDecks={setDecks} />
-          </Route>
-
-          <Route exact path="/decks/:deckId">
-            <ViewDeck decks={decks} />
-          </Route>
-
-          <Route exact path={"/decks/:deckId/edit"}>
-            <EditDeck />
-          </Route>
-
-          <Route exact path="/decks/:deckId/study">
-            <Study />
-          </Route>
+          <DeckRouting decks={decks} setDecks={setDecks} />
 
           <Route>
             <NotFound />
@@ -60,5 +43,4 @@ function Layout() {
     </>
   );
 }
-
 export default Layout;
