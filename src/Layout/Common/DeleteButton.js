@@ -1,20 +1,25 @@
 /**
  * Takes in an id and calls deletedDeck to remove the deck with the matching id
  */
+import { useRouteMatch } from "react-router-dom";
 import { useHistory } from "react-router-dom"
-import { deleteDeck } from "../../utils/api/index"
+import { deleteCard, deleteDeck } from "../../utils/api/index"
 
-export default function DeleteButton({deckId}){
+export default function DeleteButton({cardId = null, deckId = null}){
     const history = useHistory();
+    const match = useRouteMatch();
 
     const handleDelete = () => {
         const aborter = new AbortController();
 
-        if(window.confirm("Delete Deck? \n\n This is unrecoverable.")){
-            deleteDeck(deckId, aborter.signal);
+        if( cardId && window.confirm("Delete Card?\n\n You will not be able to recover it.")){
+            deleteCard(cardId, aborter.signal);
             history.go(0);
         }
+        if( deckId && window.confirm("Delete Deck? \n\n This is unrecoverable.")){
+            deleteDeck(deckId, aborter.signal);
+            match.path === "/" ? history.go(0) : history.push("/")
+        }
     }
-
     return <button type="button" className="btn btn-danger" onClick={handleDelete}>Delete</button>
 }
