@@ -8,12 +8,12 @@ export default function DeckListItem({ deckId, name, cards, description}) {
       <h3>{name}</h3>
       <span>{`${cards.length} cards`}</span>
       <p>{description}</p>
-      <Link to={`/deck/${deckId}`}>
+      <Link to={`/decks/${deckId}`}>
         <button type="button" className="btn btn-secondary">
           View
         </button>
       </Link>
-      <Link to={`/deck/${deckId}/study`}>
+      <Link to={`/decks/${deckId}/study`}>
         <button type="button" className="btn btn-secondary">
           Study
         </button>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { createDeck } from "../../utils/api";
+import Crumb from "../Common/Crumb";
 
 export default function CreateDeck() {
   const INITIAL_FORM_DATA = {
@@ -16,10 +18,19 @@ export default function CreateDeck() {
     });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    createDeck(formData).then(({ id }) => history.push(`/decks/${id}`));
+  };
 
   return (
     <>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <Crumb destination={"/"} name={"Home"} />
+          <Crumb name={"Create Deck"} isActive={true} />
+        </ol>
+      </nav>
       <h2>Create Deck</h2>
       <form onSubmit={handleSubmit}>
         <div>
