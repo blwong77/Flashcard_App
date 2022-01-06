@@ -13,11 +13,8 @@ function Layout() {
 
   useEffect(() => {
     const aborter = new AbortController();
-    async function listingDecks() {
-      const deckArr = await listDecks(aborter.signal);
-      setDecks(deckArr);
-    }
-    listingDecks();
+    listDecks(aborter.signal).then(setDecks)
+    
     return () => {
       aborter.abort();
     };
@@ -37,15 +34,19 @@ function Layout() {
             <hr />
             <DeckList decks={decks} />
           </Route>
+
           <Route exact path="/decks/new">
             <CreateDeck />
           </Route>
+
           <Route exact path="/decks/:deckId">
             <ViewDeck decks={decks} />
           </Route>
+
           <Route exact path="/decks/:deckId/study">
             <Study decks={decks} />
           </Route>
+          
           <Route>
             <NotFound />
           </Route>
