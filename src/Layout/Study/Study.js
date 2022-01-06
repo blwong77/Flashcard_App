@@ -18,7 +18,6 @@ export default function Study({decks}) {
     const indexOfDeck = deckId-1
     const {name} = decks[indexOfDeck];
   
-  
     return (
       <>
         <nav aria-label="breadcrumb">
@@ -30,7 +29,6 @@ export default function Study({decks}) {
         </nav>
         <h2>Study: {name}</h2>
         <StudyCardDeck deck={decks[indexOfDeck]} />
-        
       </>
     );
   }
