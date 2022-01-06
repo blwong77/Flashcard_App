@@ -5,7 +5,7 @@ import Crumb from "../Common/Crumb";
 import DeleteButton from "../Common/DeleteButton";
 import Card from "./Card";
 
-export default function ViewDeck({ decks }) {
+export default function ViewDeck() {
   const { deckId } = useParams();
   const [currentDeck, setCurrentDeck] = useState([]);
 

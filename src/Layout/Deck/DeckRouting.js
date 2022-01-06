@@ -5,7 +5,7 @@ import CreateDeck from "./CreateDeck";
 import ViewDeck from "./ViewDeck";
 import Study from "../Study/Study";
 
-export default function DeckRouting({ decks, setDecks }) {
+export default function DeckRouting({ setDecks }) {
   return (
     <>
       <Switch>
@@ -14,7 +14,7 @@ export default function DeckRouting({ decks, setDecks }) {
         </Route>
 
         <Route exact path="/decks/:deckId">
-          <ViewDeck decks={decks} />
+          <ViewDeck />
         </Route>
 
         <Route exact path={"/decks/:deckId/edit"}>
