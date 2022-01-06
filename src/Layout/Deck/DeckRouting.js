@@ -20,7 +20,7 @@ export default function DeckRouting({ setDecks }) {
         </Route>
 
         <Route exact path={"/decks/:deckId/edit"}>
-          <EditDeck />
+          <EditDeck currentDeck={currentDeck} setCurrentDeck={setCurrentDeck}/>
         </Route>
 
         <Route exact path="/decks/:deckId/study">
