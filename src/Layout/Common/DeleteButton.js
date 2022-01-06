@@ -1,5 +1,8 @@
+/**
+ * Takes in an id and calls deletedDeck to remove the deck with the matching id
+ */
 import { useHistory } from "react-router-dom"
-import { deleteDeck } from "../../utils/api"
+import { deleteDeck } from "../../utils/api/index"
 
 export default function DeleteButton({deckId}){
     const history = useHistory();

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DeleteButton from "./DeleteButton";
+import DeleteButton from "../Common/DeleteButton";
 
 export default function DeckListItem({ deckId, name, cards, description}) {
   return (
