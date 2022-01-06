@@ -3,7 +3,8 @@ import { Switch, Route, Link } from "react-router-dom";
 import Header from "./Header";
 import { listDecks } from "../utils/api";
 import NotFound from "./NotFound";
-import DeckList from "./DeckList/DeckList";
+import DeckList from "./Deck/DeckList";
+import EditDeck from "./Deck/EditDeck";
 import Study from "./Study/Study";
 import CreateDeck from "./CreateDeck/CreateDeck";
 import ViewDeck from "./Deck/ViewDeck";
@@ -43,10 +44,14 @@ function Layout() {
             <ViewDeck decks={decks} />
           </Route>
 
+          <Route exact path={"/decks/:deckId/edit"}>
+            <EditDeck />
+          </Route>
+
           <Route exact path="/decks/:deckId/study">
             <Study decks={decks} />
           </Route>
-          
+
           <Route>
             <NotFound />
           </Route>
