@@ -5,9 +5,9 @@ import { listDecks } from "../utils/api";
 import NotFound from "./NotFound";
 import DeckList from "./Deck/DeckList";
 import EditDeck from "./Deck/EditDeck";
-import Study from "./Study/Study";
-import CreateDeck from "./CreateDeck/CreateDeck";
+import CreateDeck from "./Deck/CreateDeck";
 import ViewDeck from "./Deck/ViewDeck";
+import Study from "./Study/Study";
 
 function Layout() {
   const [decks, setDecks] = useState([]);
