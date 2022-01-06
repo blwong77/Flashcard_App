@@ -7,28 +7,33 @@
  * Displays a flip button and a next button
  *
  */
+import React, {useState, useEffect} from "react";
+import { readDeck } from "../../utils/api";
 import Crumb from "../Common/Crumb";
 import StudyCardDeck from "./StudyCardDeck";
 import { useParams } from "react-router-dom";
 
 export default function Study({decks}) {
   const { deckId } = useParams();
+  const [currentDeck, setCurrentDeck] = useState([]);
 
-  if(decks.length > 0){
-    const indexOfDeck = deckId-1
-    const {name} = decks[indexOfDeck];
-  
+  useEffect(() => {
+    const aborter = new AbortController();
+    readDeck(deckId, aborter.signal).then(setCurrentDeck);
+  }, [deckId])
+
+  if(currentDeck.id){
     return (
       <>
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
             <Crumb destination={"/"} name={"Home"} />
-            <Crumb destination={`/decks/${deckId}`} name={name} />
+            <Crumb destination={`/decks/${deckId}`} name={currentDeck.name} />
             <Crumb name={"Study"} isActive={true} />
           </ol>
         </nav>
-        <h2>Study: {name}</h2>
-        <StudyCardDeck deck={decks[indexOfDeck]} />
+        <h2>Study: {currentDeck.name}</h2>
+        <StudyCardDeck deck={currentDeck} />
       </>
     );
   }
