@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Route, Switch } from "react-router-dom";
 import EditDeck from "./EditDeck";
 import CreateDeck from "./CreateDeck";
@@ -6,6 +6,8 @@ import ViewDeck from "./ViewDeck";
 import Study from "../Study/Study";
 
 export default function DeckRouting({ setDecks }) {
+  const [currentDeck, setCurrentDeck] = useState([]);
+
   return (
     <>
       <Switch>
@@ -22,7 +24,7 @@ export default function DeckRouting({ setDecks }) {
         </Route>
 
         <Route exact path="/decks/:deckId/study">
-          <Study />
+          <Study currentDeck={currentDeck} setCurrentDeck={setCurrentDeck}/>
         </Route>
       </Switch>
     </>

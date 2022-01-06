@@ -7,20 +7,19 @@
  * Displays a flip button and a next button
  *
  */
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { readDeck } from "../../utils/api";
 import Crumb from "../Common/Crumb";
 import StudyCardDeck from "./StudyCardDeck";
 import { useParams } from "react-router-dom";
 
-export default function Study() {
+export default function Study({ currentDeck, setCurrentDeck }) {
   const { deckId } = useParams();
-  const [currentDeck, setCurrentDeck] = useState([]);
 
   useEffect(() => {
     const aborter = new AbortController();
     readDeck(deckId, aborter.signal).then(setCurrentDeck);
-  }, [deckId]);
+  }, [deckId, setCurrentDeck]);
 
   if (currentDeck.id) {
     return (
