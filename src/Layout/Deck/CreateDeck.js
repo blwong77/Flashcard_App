@@ -1,29 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { createDeck, listDecks } from "../../utils/api";
 import Crumb from "../Common/Crumb";
+import DeckForm from "../Common/DeckForm";
 
-export default function CreateDeck({setDecks}) {
-  const INITIAL_FORM_DATA = {
-    name: "",
-    description: "",
-  };
+export default function CreateDeck({ handleInput, formData, setDecks }) {
   const history = useHistory();
-  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
-  const handleInput = ({ target }) => {
-    setFormData({
-      ...formData,
-      [target.name]: target.value,
-    });
-  };
+  const handleCancel = () => {
+    history.push("/");
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     createDeck(formData).then((newDeck) => {
       listDecks()
         .then(setDecks)
-        .then(() => history.push(`/decks/${newDeck.id}`))
+        .then(() => history.push(`/decks/${newDeck.id}`));
     });
   };
 
@@ -36,37 +29,12 @@ export default function CreateDeck({setDecks}) {
         </ol>
       </nav>
       <h2>Create Deck</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <p>Name</p>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Deck Name"
-            onChange={handleInput}
-            value={formData.name}
-          />
-          <p>Description</p>
-          <textarea
-            id="description"
-            name="description"
-            placeholder="Brief description of the deck"
-            onChange={handleInput}
-            value={formData.description}
-          />
-        </div>
-        <button
-          type="btn"
-          className="btn btn-secondary"
-          onClick={() => history.push("/")}
-        >
-          Cancel
-        </button>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+      <DeckForm
+        formData={formData}
+        handleCancel={handleCancel}
+        handleInput={handleInput}
+        handleSubmit={handleSubmit}
+      />
     </>
   );
 }
