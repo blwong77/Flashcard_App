@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { Link, useParams } from "react-router-dom";
 import { readDeck } from "../../utils/api";
 import Crumb from "../Common/Crumb";
