@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function DeckForm({formDataDeck, handleCancel, handleInput, handleSubmit}) {
+export default function DeckForm({
+  formDataDeck,
+  handleCancel,
+  handleInput,
+  handleSubmit,
+}) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -22,11 +27,7 @@ export default function DeckForm({formDataDeck, handleCancel, handleInput, handl
           value={formDataDeck.description}
         />
       </div>
-      <button
-        type="btn"
-        className="btn btn-secondary"
-        onClick={handleCancel}
-      >
+      <button type="btn" className="btn btn-secondary" onClick={handleCancel}>
         Cancel
       </button>
       <button type="submit" className="btn btn-primary">

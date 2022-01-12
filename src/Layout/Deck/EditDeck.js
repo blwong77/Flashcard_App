@@ -23,7 +23,7 @@ export default function EditDeck({
   }, [deckId, setCurrentDeck, setFormDataDeck]);
 
   const handleCancel = () => {
-    history.go(-1);
+    history.push(`/decks/${deckId}`);
   };
 
   const handleSubmit = (event) => {
