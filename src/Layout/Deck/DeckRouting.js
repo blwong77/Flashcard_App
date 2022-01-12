@@ -4,6 +4,7 @@ import EditDeck from "./EditDeck";
 import CreateDeck from "./CreateDeck";
 import ViewDeck from "./ViewDeck";
 import Study from "../Study/Study";
+import NewCard from "./NewCard";
 
 export default function DeckRouting({ setDecks }) {
   const INITIAL_FORM_DATA = {
@@ -32,7 +33,7 @@ export default function DeckRouting({ setDecks }) {
         </Route>
 
         <Route exact path="/decks/:deckId">
-          <ViewDeck />
+          <ViewDeck currentDeck={currentDeck} setCurrentDeck={setCurrentDeck}/>
         </Route>
 
         <Route exact path={"/decks/:deckId/edit"}>
@@ -43,6 +44,10 @@ export default function DeckRouting({ setDecks }) {
             setCurrentDeck={setCurrentDeck}
             handleInput={handleInput}
           />
+        </Route>
+
+        <Route exact path={"/decks/:deckId/cards/new"}>
+          <NewCard />
         </Route>
 
         <Route exact path="/decks/:deckId/study">

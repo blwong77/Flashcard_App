@@ -5,14 +5,13 @@ import Crumb from "../Common/Crumb";
 import DeleteButton from "../Common/DeleteButton";
 import Card from "./Card";
 
-export default function ViewDeck() {
+export default function ViewDeck({currentDeck, setCurrentDeck}) {
   const { deckId } = useParams();
-  const [currentDeck, setCurrentDeck] = useState([]);
 
   useEffect(() => {
     const aborter = new AbortController();
     readDeck(deckId, aborter.signal).then(setCurrentDeck);
-  }, [deckId]);
+  }, [deckId, setCurrentDeck]);
 
   if (currentDeck.id) {
     return (
