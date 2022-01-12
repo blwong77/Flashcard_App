@@ -37,9 +37,12 @@ export default function ViewDeck({currentDeck, setCurrentDeck}) {
             </button>
           </Link>
 
-          <button type="btn" className="btn btn-primary">
-            +Add Cards
-          </button>
+          <Link to={`/decks/${deckId}/cards/new`}>
+            <button type="btn" className="btn btn-primary">
+              +Add Cards
+            </button>
+          </Link>
+
           <DeleteButton deckId={deckId} />
         </div>
         <div>
