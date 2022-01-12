@@ -5,8 +5,8 @@ import { readDeck, updateDeck } from "../../utils/api";
 import DeckForm from "../Common/DeckForm";
 
 export default function EditDeck({
-  formData,
-  setFormData,
+  formDataDeck,
+  setFormDataDeck,
   currentDeck,
   setCurrentDeck,
   handleInput,
@@ -18,9 +18,9 @@ export default function EditDeck({
     const aborter = new AbortController();
     readDeck(deckId, aborter.signal).then((resp) => {
       setCurrentDeck(resp);
-      setFormData({ name: resp.name, description: resp.description });
+      setFormDataDeck({ name: resp.name, description: resp.description });
     });
-  }, [deckId, setCurrentDeck, setFormData]);
+  }, [deckId, setCurrentDeck, setFormDataDeck]);
 
   const handleCancel = () => {
     history.go(-1);
@@ -28,7 +28,7 @@ export default function EditDeck({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const combinedDeck = { ...formData, id: currentDeck.id };
+    const combinedDeck = { ...formDataDeck, id: currentDeck.id };
     updateDeck(combinedDeck).then(readDeck(deckId)).then(setCurrentDeck);
   };
 
@@ -44,7 +44,7 @@ export default function EditDeck({
       <div>
         <h2>Edit Deck</h2>
         <DeckForm
-          formData={formData}
+          formDataDeck={formDataDeck}
           handleCancel={handleCancel}
           handleInput={handleInput}
           handleSubmit={handleSubmit}

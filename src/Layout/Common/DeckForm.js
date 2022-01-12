@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function DeckForm({formData, handleCancel, handleInput, handleSubmit}) {
+export default function DeckForm({formDataDeck, handleCancel, handleInput, handleSubmit}) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -11,7 +11,7 @@ export default function DeckForm({formData, handleCancel, handleInput, handleSub
           type="text"
           placeholder="Deck Name"
           onChange={handleInput}
-          value={formData.name}
+          value={formDataDeck.name}
         />
         <p>Description</p>
         <textarea
@@ -19,7 +19,7 @@ export default function DeckForm({formData, handleCancel, handleInput, handleSub
           name="description"
           placeholder="Brief description of the deck"
           onChange={handleInput}
-          value={formData.description}
+          value={formDataDeck.description}
         />
       </div>
       <button

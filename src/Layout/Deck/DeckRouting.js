@@ -7,16 +7,16 @@ import Study from "../Study/Study";
 import NewCard from "./NewCard";
 
 export default function DeckRouting({ setDecks }) {
-  const INITIAL_FORM_DATA = {
+  const INITIAL_FORM_DATA_DECK = {
     name: "",
     description: "",
   };
-  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const [formDataDeck, setFormDataDeck] = useState(INITIAL_FORM_DATA_DECK);
   const [currentDeck, setCurrentDeck] = useState([]);
 
   const handleInput = ({ target }) => {
-    setFormData({
-      ...formData,
+    setFormDataDeck({
+      ...formDataDeck,
       [target.name]: target.value,
     });
   };
@@ -27,19 +27,19 @@ export default function DeckRouting({ setDecks }) {
         <Route exact path="/decks/new">
           <CreateDeck
             handleInput={handleInput}
-            formData={formData}
+            formDataDeck={formDataDeck}
             setDecks={setDecks}
           />
         </Route>
 
         <Route exact path="/decks/:deckId">
-          <ViewDeck currentDeck={currentDeck} setCurrentDeck={setCurrentDeck}/>
+          <ViewDeck currentDeck={currentDeck} setCurrentDeck={setCurrentDeck} />
         </Route>
 
         <Route exact path={"/decks/:deckId/edit"}>
           <EditDeck
-            formData={formData}
-            setFormData={setFormData}
+            formDataDeck={formDataDeck}
+            setFormDataDeck={setFormDataDeck}
             currentDeck={currentDeck}
             setCurrentDeck={setCurrentDeck}
             handleInput={handleInput}
@@ -47,7 +47,7 @@ export default function DeckRouting({ setDecks }) {
         </Route>
 
         <Route exact path={"/decks/:deckId/cards/new"}>
-          <NewCard />
+          <NewCard currentDeck={currentDeck} setCurrentDeck={setCurrentDeck} />
         </Route>
 
         <Route exact path="/decks/:deckId/study">
