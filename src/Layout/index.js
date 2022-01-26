@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import Header from "./Header";
 import { listDecks } from "../utils/api";
-import NotFound from "./NotFound";
 import DeckList from "./Deck/DeckList";
 import DeckRouting from "./Deck/DeckRouting";
 
@@ -34,7 +33,7 @@ function Layout() {
           </Route>
 
           <DeckRouting decks={decks} setDecks={setDecks} />
-          
+
         </Switch>
       </div>
     </>
