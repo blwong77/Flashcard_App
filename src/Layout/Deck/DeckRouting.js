@@ -5,20 +5,34 @@ import CreateDeck from "./CreateDeck";
 import ViewDeck from "./ViewDeck";
 import Study from "../Study/Study";
 import NewCard from "./NewCard";
+import EditCard from "./EditCard";
+import NotFound from "../NotFound";
 
 export default function DeckRouting({ setDecks }) {
   const INITIAL_FORM_DATA_DECK = {
     name: "",
     description: "",
   };
+  const INITIAL_FORM_DATA_CARD = {
+    front: "",
+    back: "",
+  };
   const [formDataDeck, setFormDataDeck] = useState(INITIAL_FORM_DATA_DECK);
+  const [formDataCard, setFormDataCard] = useState(INITIAL_FORM_DATA_CARD);
   const [currentDeck, setCurrentDeck] = useState([]);
 
   const handleInput = ({ target }) => {
-    setFormDataDeck({
-      ...formDataDeck,
-      [target.name]: target.value,
-    });
+    if (target.name === "name" || target.name === "description") {
+      setFormDataDeck({
+        ...formDataDeck,
+        [target.name]: target.value,
+      });
+    } else {
+      setFormDataCard({
+        ...formDataCard,
+        [target.name]: target.value,
+      });
+    }
   };
 
   return (
@@ -47,12 +61,33 @@ export default function DeckRouting({ setDecks }) {
         </Route>
 
         <Route exact path={"/decks/:deckId/cards/new"}>
-          <NewCard currentDeck={currentDeck} setCurrentDeck={setCurrentDeck} />
+          <NewCard
+            formDataCard={formDataCard}
+            setFormDataCard={setFormDataCard}
+            currentDeck={currentDeck}
+            setCurrentDeck={setCurrentDeck}
+            handleInput={handleInput}
+            INITIAL_FORM_DATA_CARD={INITIAL_FORM_DATA_CARD}
+          />
+        </Route>
+
+        <Route exact path={"/decks/:deckId/cards/:cardId/edit"}>
+          <EditCard
+            currentDeck={currentDeck}
+            setCurrentDeck={setCurrentDeck}
+            formDataCard={formDataCard}
+            setFormDataCard={setFormDataCard}
+            handleInput={handleInput}
+          />
         </Route>
 
         <Route exact path="/decks/:deckId/study">
           <Study currentDeck={currentDeck} setCurrentDeck={setCurrentDeck} />
         </Route>
+
+        <Route>
+            <NotFound />
+          </Route>
       </Switch>
     </>
   );

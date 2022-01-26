@@ -8,7 +8,7 @@ export default function Card({ card, deckId }) {
       <li className="list-group-item">
         <p>{card.front}</p>
         <p>{card.back}</p>
-        <Link to={`/decks/${deckId}/edit`}>
+        <Link to={`/decks/${deckId}/cards/${card.id}/edit`}>
           <button type="btn" className="btn btn-secondary">
             Edit
           </button>

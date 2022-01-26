@@ -34,10 +34,7 @@ function Layout() {
           </Route>
 
           <DeckRouting decks={decks} setDecks={setDecks} />
-
-          <Route>
-            <NotFound />
-          </Route>
+          
         </Switch>
       </div>
     </>
