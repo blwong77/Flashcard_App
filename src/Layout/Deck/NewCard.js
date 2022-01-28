@@ -19,7 +19,7 @@ export default function NewCard({
   useEffect(() => {
     readDeck(deckId).then(setCurrentDeck);
   }, [deckId, setCurrentDeck]);
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const newCard = {
@@ -31,8 +31,9 @@ export default function NewCard({
       listDecks().then(setDecks);
     });
   };
-
+  
   const handleDone = () => {
+    setFormDataCard(INITIAL_FORM_DATA_CARD);
     history.push(`/decks/${deckId}`);
   };
 
