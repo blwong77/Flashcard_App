@@ -60,7 +60,7 @@ export default function StudyCardDeck({ deck }) {
           You need at least 3 cards to study. There are {cards.length} cards in
           this deck.
         </p>
-        <Link to={"/decks/new"}>
+        <Link to={`/decks/${deck.id}/cards/new`}>
           <button type="btn" className="btn btn-primary">
             +Add Cards
           </button>

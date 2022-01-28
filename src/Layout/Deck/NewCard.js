@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { createCard, readDeck } from "../../utils/api";
+import { createCard, listDecks, readDeck } from "../../utils/api";
 import Crumb from "../Common/Crumb";
 import CardForm from "../Common/CardForm";
 
 export default function NewCard({
+  setDecks,
   formDataCard,
   setFormDataCard,
   currentDeck,
   setCurrentDeck,
   handleInput,
-  INITIAL_FORM_DATA_CARD
+  INITIAL_FORM_DATA_CARD,
 }) {
   const { deckId } = useParams();
   const history = useHistory();
@@ -23,13 +24,16 @@ export default function NewCard({
     event.preventDefault();
     const newCard = {
       ...formDataCard,
-      deckId: currentDeck.id
-    }
-    createCard(deckId, newCard).then(setFormDataCard(INITIAL_FORM_DATA_CARD))
-  }
+      deckId: currentDeck.id,
+    };
+    createCard(deckId, newCard).then(() => {
+      setFormDataCard(INITIAL_FORM_DATA_CARD);
+      listDecks().then(setDecks);
+    });
+  };
 
   const handleDone = () => {
-    history.push(`/decks/${deckId}`)
+    history.push(`/decks/${deckId}`);
   };
 
   return (
@@ -49,7 +53,6 @@ export default function NewCard({
           handleInput={handleInput}
           handleSubmit={handleSubmit}
         />
-        
       </div>
     </>
   );

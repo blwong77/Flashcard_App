@@ -52,6 +52,7 @@ export default function DeckRouting({ setDecks }) {
 
         <Route exact path={"/decks/:deckId/edit"}>
           <EditDeck
+            setDecks={setDecks}
             formDataDeck={formDataDeck}
             setFormDataDeck={setFormDataDeck}
             currentDeck={currentDeck}
@@ -62,6 +63,7 @@ export default function DeckRouting({ setDecks }) {
 
         <Route exact path={"/decks/:deckId/cards/new"}>
           <NewCard
+            setDecks={setDecks}
             formDataCard={formDataCard}
             setFormDataCard={setFormDataCard}
             currentDeck={currentDeck}
@@ -86,8 +88,8 @@ export default function DeckRouting({ setDecks }) {
         </Route>
 
         <Route>
-            <NotFound />
-          </Route>
+          <NotFound />
+        </Route>
       </Switch>
     </>
   );

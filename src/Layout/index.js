@@ -32,8 +32,7 @@ function Layout() {
             <DeckList decks={decks} />
           </Route>
 
-          <DeckRouting decks={decks} setDecks={setDecks} />
-
+          <DeckRouting setDecks={setDecks} />
         </Switch>
       </div>
     </>
