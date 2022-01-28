@@ -5,6 +5,7 @@ import CardForm from "../Common/CardForm";
 import Crumb from "../Common/Crumb";
 
 export default function EditCard({
+  INITIAL_FORM_DATA_CARD,
   currentDeck,
   setCurrentDeck,
   formDataCard,
@@ -24,13 +25,21 @@ export default function EditCard({
   }, [cardId, deckId, setCurrentDeck, setFormDataCard]);
 
   const handleDone = () => {
+    setFormDataCard(INITIAL_FORM_DATA_CARD);
     history.push(`/decks/${deckId}`);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const combinedCard = { ...formDataCard, id: cardId, deckId: currentDeck.id };
-    updateCard(combinedCard).then(history.push(`/decks/${deckId}`));
+    const combinedCard = {
+      ...formDataCard,
+      id: cardId,
+      deckId: currentDeck.id,
+    };
+    updateCard(combinedCard).then(() => {
+      setFormDataCard(INITIAL_FORM_DATA_CARD);
+      history.push(`/decks/${deckId}`);
+    });
   };
 
   return (

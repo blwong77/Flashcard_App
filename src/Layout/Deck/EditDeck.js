@@ -29,7 +29,11 @@ export default function EditDeck({
   const handleSubmit = (event) => {
     event.preventDefault();
     const combinedDeck = { ...formDataDeck, id: currentDeck.id };
-    updateDeck(combinedDeck).then(readDeck(deckId)).then(setCurrentDeck);
+    updateDeck(combinedDeck).then(() => {
+      readDeck(deckId)
+        .then(setCurrentDeck)
+        .then(history.push(`/decks/${deckId}`));
+    });
   };
 
   return (

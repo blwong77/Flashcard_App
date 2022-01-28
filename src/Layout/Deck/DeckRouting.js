@@ -75,6 +75,7 @@ export default function DeckRouting({ setDecks }) {
 
         <Route exact path={"/decks/:deckId/cards/:cardId/edit"}>
           <EditCard
+            INITIAL_FORM_DATA_CARD={INITIAL_FORM_DATA_CARD}
             currentDeck={currentDeck}
             setCurrentDeck={setCurrentDeck}
             formDataCard={formDataCard}
